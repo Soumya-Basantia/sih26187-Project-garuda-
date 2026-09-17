@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Garuda — ANPR Demo License Plates</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0b0f19;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #38bdf8;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    p.subtitle {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 30px;
+      text-align: center;
+      max-width: 600px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 25px;
+      width: 100%;
+      max-width: 1100px;
+    }
+    .card {
+      background: #131b2e;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .card.cleared { border-color: rgba(16, 185, 129, 0.4); }
+    .card.watchlist { border-color: rgba(239, 68, 68, 0.5); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-cleared { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-watchlist { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .plate-img-wrapper {
+      background: #000;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      margin-bottom: 18px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .plate-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .plate-img:hover {
+      transform: scale(1.02);
+    }
+    .details {
+      width: 100%;
+      background: #0b1120;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    .details strong { color: #f1f5f9; }
+    .tip {
+      margin-top: 30px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 16px 20px;
+      border-radius: 8px;
+      max-width: 800px;
+      font-size: 13px;
+      color: #93c5fd;
+      line-height: 1.5;
+    }
+    .tip strong { color: #38bdf8; }
+  </style>
+</head>
+<body>
+
+  <h1>Project Garuda — Demo License Plates</h1>
+  <p class="subtitle">
+    Hold either of these plates up to your active camera stream, or upload them to the ANPR scanner to evaluate real-time checkpoint access.
+  </p>
+
+  <div class="cards-grid">
+    <!-- CLEARED VEHICLE -->
+    <div class="card cleared">
+      <div class="badge badge-cleared">✓ Registered & Cleared Vehicle</div>
+      <div class="plate-img-wrapper">
+        <img src="plate_cleared_DL01AB1234.jpg" alt="DL 01 AB 1234" class="plate_img" />
+      </div>
+      <div class="details">
+        <div><strong>Plate Number:</strong> DL 01 AB 1234</div>
+        <div><strong>Vehicle Type:</strong> SUV / Official</div>
+        <div><strong>Registered Owner:</strong> Capt. Vikram Singh</div>
+        <div><strong>Expected Behavior:</strong> Green HUD overlay <code>CLEARED</code> (or <code>✓ 2FA VERIFIED</code> if owner face is verified) + Entry logged into Gate Access table.</div>
+      </div>
+    </div>
+
+    <!-- WATCHLIST VEHICLE -->
+    <div class="card watchlist">
+      <div class="badge badge-watchlist">🚨 Threat Watchlist Vehicle (BOLO Intercept)</div>
+      <div class="plate-img-wrapper">
+        <img src="plate_watchlist_JK02XY9999.jpg" alt="JK 02 XY 9999" class="plate_img" />
+      </div>
+      <div class="details">
+        <div><strong>Plate Number:</strong> JK 02 XY 9999</div>
+        <div><strong>Vehicle Type:</strong> Heavy Transport Truck</div>
+        <div><strong>Watchlist Status:</strong> <span style="color:#ef4444; font-weight:bold;">THREAT ACTIVE</span></div>
+        <div><strong>Expected Behavior:</strong> Flashes bright red HUD overlay <code>🚨 WATCHLIST: JK02XY9999</code> + Fires high-priority <code>WATCHLIST_VEHICLE</code> alarm in dashboard.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Testing Instructions for Option B:</strong><br/>
+    1. <strong>Click any plate</strong> to expand it into full-screen high-contrast mode.<br/>
+    2. Hold your smartphone or window up to your camera lens (approx. 20–40 cm away).<br/>
+    3. In the live surveillance grid, observe the bounding box turn green (<strong>CLEARED</strong>) or red (<strong>WATCHLIST HIT</strong>).<br/>
+    4. Switch to <strong>Identities &rarr; Gate Access &amp; ANPR Log</strong> in the dashboard to see the real-time gate entry log!
+  </div>
+
+  <!-- Fullscreen Modal -->
+  <div id="fsModal" style="display:none; position:fixed; inset:0; background:#000; z-index:9999; flex-direction:column; align-items:center; justify-content:center; cursor:pointer;" onclick="closeFullscreen()">
+    <div style="color:#94a3b8; font-size:14px; margin-bottom:20px; text-transform:uppercase; letter-spacing:1px;">Click anywhere to exit full-screen</div>
+    <img id="fsImg" style="max-width:92vw; max-height:75vh; border-radius:12px; box-shadow:0 0 50px rgba(255,255,255,0.15);" src="" alt="Full Screen Plate" />
+  </div>
+
+  <script>
+    document.querySelectorAll('.plate-img').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('fsImg').src = img.src;
+        document.getElementById('fsModal').style.display = 'flex';
+      });
+    });
+    function closeFullscreen() {
+      document.getElementById('fsModal').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

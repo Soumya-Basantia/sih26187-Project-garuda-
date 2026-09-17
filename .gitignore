@@ -1,0 +1,61 @@
+# Python & Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node.js & Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+dist-ssr/
+*.local
+.gev-cache/
+.gev-logs/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# IDE & OS Files
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Project Runtime Artifacts & Model Weights
+backend/data/snapshots/
+data/
+backend/data/
+*.pt
+yolov8*.pt
+ai_engine/models/*.pt
+demo/videos/*.mp4
+demo_plates/*.jpg
+*.db
+*.sqlite
+*.sqlite3
+query
+scratch/
+logs/
+*.log
